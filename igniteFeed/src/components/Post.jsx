@@ -10,7 +10,7 @@ export function Post({author, publishdAt, content}){
         'Um post muito bacana!'
     ])
 
-const [newCommentText, setNewCommenttext] = useState("")
+const [newCommentText, setNewCommenttext] = useState('')
 
 const publishedDateFormatted = format(publishdAt, "d 'de' LLLL 'às' HH:mm'h'", {
     locale: ptBR,
@@ -28,7 +28,12 @@ function handleCreateNewComment(){
 }
 
 function handleNewCommentChange(){
-   setNewCommenttext(event.target.value)
+    event.target.setCustomValidity('')
+    setNewCommenttext(event.target.value)
+}
+
+function handleNewCommentInvalid(){
+    event.target.setCustomValidity('Este campo é obrigatório')
 }
 
 function deleteComment(commentToDelete){
@@ -68,10 +73,12 @@ function deleteComment(commentToDelete){
                     placeholder='Deixe seu comentário'
                     value={newCommentText}
                     onChange={handleNewCommentChange}
+                    onInvalid={handleNewCommentInvalid}
+                    required={true}
                     />
                 <footer>
 
-                    <button type='submit'>Publicar</button>
+                    <button type='submit' disabled={newCommentText.length == 0}>Publicar</button>
                 </footer>
             </form>
             <div className={styles.commentList}>
