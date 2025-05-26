@@ -1,13 +1,13 @@
-import { Post } from "./components/Post"
+import { Post} from './components/Post'
 import "./global.css"
-import { Header } from "./components/Header"
-import styles from "./App.module.css"
-import { Sidebar } from "./components/Sidebar"
+import { Header } from './components/Header'
+import styles from './App.module.css'
+import { Sidebar } from './components/Sidebar'
 import imgUser1 from './assets/user1.png'
 import imgUser from './assets/user.png'
-import { id } from "date-fns/locale"
+import type { PostType } from './components/Post'
 
-const posts = [
+const posts: PostType[] = [
   {
     id: 1,
     author: {
@@ -49,9 +49,7 @@ export function App() {
             return( 
               <Post
                 key={post.id}
-                author={post.author}
-                content={post.content}
-                publishdAt={post.publishdAt}
+                post={post}
               />
           )
           })}
